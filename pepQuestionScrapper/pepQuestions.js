@@ -59,19 +59,12 @@ function getQuestions(level, name, href) {
         let allQuestionLinks = mt(".col.l12.s12.l-desc-icon");
         let questionNames = mt(".col.l12.s12.l-desc-icon .name");
 
-        //==========================================================================
-        // if (!data[name]) {
-        //     data[name] = [];
-        // }
-        //===========================================================================
-
-        if()
-
+        console.log(name);
         for (let i = 0; i < allQuestionLinks.length; i++) {
             let QuesLink = "https://www.pepcoding.com" + mt(allQuestionLinks[i]).find("a").attr("href");
             let ques = mt(questionNames[i]).text().trim();
 
-            
+            console.log(Qu);
             //===========================================================================
             // data[name].push({ "Question Name": ques, "Question Link": QuesLink });
             // fs.writeFileSync("question.json", JSON.stringify(data));

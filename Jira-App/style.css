@@ -106,12 +106,6 @@ body {
     background-color: #48dbfb;
 }
 
-
-/* !important -> it override  the property of these predefined icons */
-
-
-/* these icons have pre-defined properties so (!important) overrride the predefined properties */
-
 .material-icons {
     font-size: 2rem!important;
     cursor: default;
@@ -122,9 +116,7 @@ body {
     width: 35rem;
     position: fixed;
     top: 20vh;
-    /* ye left wala 50% body ki width ka 50 hai */
     left: 50%;
-    /* translate function ->  ye particular element ka 50% nikal kr usse body ke 50% k sath allign kr deta hai */
     transform: translateX(-50%);
     display: flex;
 }

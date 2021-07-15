@@ -8,6 +8,8 @@ let colors = ["pink", "blue", "green", "black"];
 
 let allFiltersChildren = document.querySelectorAll(".filter div");
 
+
+// ---------- SETTING-UP THE COLOR CLASS ON CLICK --------------
 for (let i = 0; i < allFiltersChildren.length; i++) {
     allFiltersChildren[i].addEventListener("click", function(e) {
 
@@ -28,7 +30,7 @@ for (let i = 0; i < allFiltersChildren.length; i++) {
     });
 }
 
-// LOCALSTORAGE ka objbect check kr rhe hai and fir usme  sare tickets dall rhe h fir uske bad unn sbhi tickets ko localStorage me store kar rhe h
+// ----------- CREATING A LOCALSTORAGE --------------
 if (localStorage.getItem("AllTickets") == undefined) {
     let allTickets = {};
     allTickets = JSON.stringify(allTickets);
@@ -37,7 +39,7 @@ if (localStorage.getItem("AllTickets") == undefined) {
 
 loadTasks();
 
-//adding delete button class for selecting and de-selecting the delete button
+// --------- CREATING A EVENTLISTNER OF DELETE BUTTON --------------
 deleteBtn.addEventListener("click", function(e) {
     if (e.currentTarget.classList.contains("delete-selected")) {
         e.currentTarget.classList.remove("delete-selected");
@@ -51,11 +53,8 @@ deleteBtn.addEventListener("click", function(e) {
 
 
 
-
+// ------------- FUNCTIONALITY OF ADD BUTTON --------
 addBtn.addEventListener("click", function() {
-
-
-    //jab ticket add kr rhe h to delete mode ko band krna hai
 
     deleteBtn.classList.remove("delete-selected");
     deleteMode = false;
@@ -86,6 +85,7 @@ addBtn.addEventListener("click", function() {
 
     let ticketColor = "black";
 
+    // -------------  SETTING UP THE CLASS OF COLOR SELECTED ON CLICK ------------
     let allModalPriority = div.querySelectorAll(".modal-priority");
     for (let i = 0; i < allModalPriority.length; i++) {
         allModalPriority[i].addEventListener("click", function(e) {
@@ -104,24 +104,25 @@ addBtn.addEventListener("click", function() {
 
     let taskInnerContainer = div.querySelector(".task-inner-container");
 
+    // ------- ON ENTERING CREATING A UNIQUE-ID AND TASK GIVEN BY THE USER -------
     taskInnerContainer.addEventListener("keydown", function(e) {
         if (e.key == "Enter") {
             let id = uid();
             let task = e.currentTarget.innerText;
 
-            //step1 : jo bhi data h localstorage me usee lekr aao
+
             let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
 
-            //step2 : usko update kro
+
             let ticketObj = {
                 color: ticketColor,
                 taskValue: task,
             };
 
-            //jo bhi ticket kaq data and color aa rha h vo is given id ke samne save ho jayega 
+
             allTickets[id] = ticketObj;
 
-            //step3 : vapis updated object ko local stroage me save kro
+
 
             localStorage.setItem("AllTickets", JSON.stringify(allTickets));
 
@@ -140,26 +141,28 @@ addBtn.addEventListener("click", function() {
             </div>
         </div>`;
 
-            // YAHA TICKET K COLOR CHANGE KA PRIORITY COLOR CHANGE KAR RHE HAI
+
             let ticketColorDiv = ticketDiv.querySelector(".ticket-color");
 
-            // yaha upar val;ue html me se text box ka content fetch kr rhe hai by fetching the div tag of that section
+
             let actualTaskDiv = ticketDiv.querySelector(".actual-task");
 
+            // ----- UPDATING THE CHNAGES IN TASK EVERY TIME WHEN SOMETHING IS INPUTED  --------
             actualTaskDiv.addEventListener("input", function(e) {
                 let updatedTask = e.currentTarget.innerText;
                 let currTicketId = e.currentTarget.getAttribute("data-id");
-                // yaha task k anadr ka text update kr rhe hai
-                //step 1. fetching all tickets
+
                 let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
 
-                // step 2. updating the actual task in localStroage
+
                 allTickets[currTicketId].taskValue = updatedTask;
 
-                // step 3. saving all the updated task
+
                 localStorage.setItem("AllTickets", JSON.stringify(allTickets));
             })
 
+            // ------ GIVING THE FUNCTIONALITY OF COLOR CHANGE BY USER ------
+            // -> COLOIR DENOTES THE PRIORITY 
             ticketColorDiv.addEventListener("click", function(e) {
 
                 let currTicketId = e.currentTarget.getAttribute("data-id");
@@ -171,20 +174,19 @@ addBtn.addEventListener("click", function() {
                         index = i;
                     }
                 }
-                // 4 COLORS HAI -> AGAR VALUE 4 SE CHOTI HAI TO VHI VALUE RETURN HO JAYEGE AND VALUE 4 HO JAYEGE TO MOD 0 DE DEGA AND COLOR FIR SE VHI AA JAYEGA
+
                 index++;
                 index = index % 4;
 
                 let newColor = colors[index];
 
-                // yaha hum color update kar rhe h jo hum UI par change kar rhe hai 
-                //step 1. all tickets lana
+
                 let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
 
-                //step 2. tickets ko update karna
+
                 allTickets[currTicketId].color = newColor;
 
-                //step 3. tickets ko save krna hai
+
                 localStorage.setItem("AllTickets", JSON.stringify(allTickets));
 
 
@@ -194,7 +196,7 @@ addBtn.addEventListener("click", function() {
 
             })
 
-            //TICKET OPEN KRNE K BAD USSE CLOSE KRNE KA CODE HAI AGAR ADD BUTTON PR GLTI SE CLICK HO GAYA H TO USSE DLETE KAR SAKTE HAI 
+            // ---- ON CLICKING ON TICKET THE TICKET WILL BE DELETED ---------
             ticketDiv.addEventListener("click", function(e) {
                 if (deleteMode) {
                     let currTicketId = e.currentTarget.getAttribute("data-id");
@@ -216,6 +218,8 @@ addBtn.addEventListener("click", function() {
     body.append(div);
 });
 
+
+//------------ EVERNT LISTENERS FUNCTION OF LOADING TICKETS AND LISTENERS ------
 function loadTasks(color) {
 
     let ticketsOnUi = document.querySelectorAll(".ticket");
@@ -223,10 +227,10 @@ function loadTasks(color) {
     for (let i = 0; i < ticketsOnUi.length; i++) {
         ticketsOnUi[i].remove();
     }
-    // 1. fetch alltickets data
+
     let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
 
-    // 2. create tickets UI for each  ticket obj
+
     for (x in allTickets) {
         let currTicketId = x;
         let singleTicketObj = allTickets[x];
@@ -251,18 +255,17 @@ function loadTasks(color) {
         let actualTaskDiv = ticketDiv.querySelector(".actual-task");
 
 
-        // 3. attach require event listers
+
         actualTaskDiv.addEventListener("input", function(e) {
             let updatedTask = e.currentTarget.innerText;
             let currTicketId = e.currentTarget.getAttribute("data-id");
-            // yaha task k anadr ka text update kr rhe hai
-            //step 1. fetching all tickets
+
             let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
 
-            // step 2. updating the actual task in localStroage
+
             allTickets[currTicketId].taskValue = updatedTask;
 
-            // step 3. saving all the updated task
+
             localStorage.setItem("AllTickets", JSON.stringify(allTickets));
         })
 
@@ -277,20 +280,19 @@ function loadTasks(color) {
                     index = i;
                 }
             }
-            // 4 COLORS HAI -> AGAR VALUE 4 SE CHOTI HAI TO VHI VALUE RETURN HO JAYEGE AND VALUE 4 HO JAYEGE TO MOD 0 DE DEGA AND COLOR FIR SE VHI AA JAYEGA
+
             index++;
             index = index % 4;
 
             let newColor = colors[index];
 
-            // yaha hum color update kar rhe h jo hum UI par change kar rhe hai 
-            //step 1. all tickets lana
+
             let allTickets = JSON.parse(localStorage.getItem("AllTickets"));
 
-            //step 2. tickets ko update karna
+
             allTickets[currTicketId].color = newColor;
 
-            //step 3. tickets ko save krna hai
+
             localStorage.setItem("AllTickets", JSON.stringify(allTickets));
 
 
@@ -300,7 +302,7 @@ function loadTasks(color) {
 
         })
 
-        //TICKET OPEN KRNE K BAD USSE CLOSE KRNE KA CODE HAI AGAR ADD BUTTON PR GLTI SE CLICK HO GAYA H TO USSE DLETE KAR SAKTE HAI 
+
         ticketDiv.addEventListener("click", function(e) {
             if (deleteMode) {
                 let currTicketId = e.currentTarget.getAttribute("data-id");
@@ -312,7 +314,7 @@ function loadTasks(color) {
             }
         });
 
-        // 4. add tickets in the grid section of UI
+
         grid.append(ticketDiv);
     }
 

@@ -26,11 +26,27 @@ body {
 }
 
 .filters,
-.action-buttons {
+.action-buttons,
+.styling {
     height: 50%;
     background-color: #2f3542;
     margin-top: calc( ( 25 / 100) * 15vh);
     margin-left: 5rem;
+}
+
+.styling {
+    width: 12rem;
+    display: flex;
+}
+
+.bold,
+.italics,
+.underline {
+    width: 33%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .filters {
@@ -75,8 +91,19 @@ body {
 
 .add:hover,
 .delete:hover,
-.delete-selected {
+.bold:hover,
+.italics:hover,
+.underline:hover,
+.font:hover,
+.delete-selected,
+.bold-selected,
+.italics-selected,
+.underline-selected {
     background-color: #747d8c;
+}
+
+.underline-text {
+    text-decoration: underline;
 }
 
 .color-selected {
@@ -106,6 +133,12 @@ body {
     background-color: #48dbfb;
 }
 
+
+/* !important -> it override  the property of these predefined icons */
+
+
+/* these icons have pre-defined properties so (!important) overrride the predefined properties */
+
 .material-icons {
     font-size: 2rem!important;
     cursor: default;
@@ -116,7 +149,9 @@ body {
     width: 35rem;
     position: fixed;
     top: 20vh;
+    /* ye left wala 50% body ki width ka 50 hai */
     left: 50%;
+    /* translate function ->  ye particular element ka 50% nikal kr usse body ke 50% k sath allign kr deta hai */
     transform: translateX(-50%);
     display: flex;
 }
@@ -184,6 +219,7 @@ body {
     height: 12rem;
     border: 2px solid #485460;
     font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
 }
 
 .ticket-color {

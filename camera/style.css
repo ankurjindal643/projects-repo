@@ -1,0 +1,132 @@
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 0;
+    }
+    
+    .video-container {
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+    }
+    
+    video {
+        height: 100%;
+        width: 100%;
+    }
+    
+    button {
+        position: fixed;
+        bottom: 2rem;
+        left: 40vw;
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+        border: 8px solid white;
+        background: black;
+        z-index: 3;
+    }
+    
+    button span {
+        height: 60%;
+        width: 70%;
+        display: inline-block;
+        border-radius: 50%;
+    }
+    
+    #capture {
+        left: 40vw;
+    }
+    
+    #gallery {
+        color: white;
+        font-size: 1.1rem;
+        left: 30vw;
+    }
+    
+    #record {
+        left: 60vw;
+    }
+    
+    #record span {
+        background-color: red;
+    }
+    
+    #capture span {
+        background-color: white;
+    }
+    
+    .filters {
+        z-index: 3;
+        position: fixed;
+        height: 12rem;
+        width: 3rem;
+        border: 1px solid;
+        bottom: 2rem;
+        left: 20vw;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .filter {
+        border: 1px solid;
+        flex-grow: 1;
+        background-blend-mode: color-burn;
+        background-size: cover;
+        background-image: url(https://i.pinimg.com/originals/14/47/fd/1447fd1882e6fe0b21090dfae034b4e3.png);
+    }
+    
+    .zoom {
+        z-index: 3;
+        position: fixed;
+        height: 8rem;
+        width: 3rem;
+        border: 1px solid;
+        bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        left: 70vw;
+    }
+    
+    .zoom div {
+        z-index: 3;
+        background-color: #332e2e;
+        flex-grow: 1;
+        color: white;
+        font-size: 3rem;
+        text-align: center;
+    }
+    
+    .capture-animation {
+        animation: shrinkDownUp;
+        animation-duration: 1s;
+    }
+    
+    .record-animation {
+        animation: shrinkDownUp;
+        animation-duration: 0.7s;
+        animation-iteration-count: infinite;
+    }
+    
+    .filter-div {
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        z-index: 1;
+    }
+    
+    @keyframes shrinkDownUp {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(0.7);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
